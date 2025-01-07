@@ -1,0 +1,60 @@
+<%- include('./layouts/header') %>
+<h1><span class="goback" onclick="window.history.back()">←</span> Profile</h1>
+
+<form action="/user/profile" method="POST" class="lg-form">
+  <% if (person.roles.includes('Patient')) { %>
+    <div>
+      <label for="patientid">Patient ID (unedittable)</label>
+      <input type="text" name="patientid" id="patientid" value="<%= person._id %>" readonly />
+    </div>
+  <% } %>
+  <div>
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" value="<%= person.email %>" required />
+  </div>
+  <div>
+    <label for="firstName">First Name</label>
+    <input type="text" name="firstName" id="firstName" value="<%= person.firstName %>" required />
+  </div>
+  <div>
+    <label for="lastName">Last Name</label>
+    <input type="text" name="lastName" id="lastName" value="<%= person.lastName %>" required />
+  </div>
+  <div>
+    <label for="phone">Phone</label>
+    <input type="text" name="phone" id="phone" value="<%= person.phone %>" required />
+  </div>
+  <div style="margin-bottom: 20px;">
+    <label for="role">Role</label>
+    <p class="subtitle"><%= person.roles.join(', ') %></p>
+  </div>
+  <fieldset>
+    <legend style="font-weight: bold; margin-bottom: 10px;">Address</legend>
+    <div>
+      <label for="street">Street</label>
+      <input type="text" name="address[street]" id="street" value="<%= person.address.street %>" />
+    </div>
+    <div>
+      <label for="city">City</label>
+      <input type="text" name="address[city]" id="city" value="<%= person.address.city %>" />
+    </div>
+    <div>
+      <label for="state">State</label>
+      <input type="text" name="address[state]" id="state" value="<%= person.address.state %>" />
+    </div>
+    <div>
+      <label for="zip">ZIP</label>
+      <input type="text" name="address[zip]" id="zip" value="<%= person.address.zip %>" />
+    </div>
+  </fieldset>
+  
+  <div>
+      <label for="user-object">User object</label>
+      <pre class="subtitle"><%= person %></pre>
+    </div>
+  <div>
+    <input type="submit" value="Update Profile" />
+  </div>
+</form>
+
+<%- include('./layouts/footer') %>

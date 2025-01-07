@@ -1,0 +1,28 @@
+<%- include('./layouts/header') %>
+
+<form action="/auth/login" method="post" class="lg-form">
+  <h1 style="color: aliceblue; text-align: center;">Login</h1>
+  <div>
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" />
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" />
+  </div>
+  <div>
+    <input type="submit" value="Login" />
+  </div>
+
+  <p class="gradient-text">
+    <strong>
+    Don't have an account? You can create one <span><a href="/auth/register" style="color: rgb(0, 255, 251);">here</a></span>
+    </strong>
+  </p>
+</form>
+
+<div>
+
+</div>
+<br />
+<%- include('./layouts/footer') %>

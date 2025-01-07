@@ -1,0 +1,4 @@
+train: /kaggle/input/mydata-v3/output_dataset/images/train     
+val: /kaggle/input/mydata-v3/output_dataset/images/val      
+nc: 2                        
+names: ['BS1', 'BS2']        

@@ -1,0 +1,104 @@
+Hệ thống RBAC trong lĩnh vực thông tin y tế (Health Information System - HIS) bao gồm các vai trò chính như sau:
+1. Administrator (ADMIN)
+Trách nhiệm:
+Quản lý toàn bộ hệ thống.
+Phân quyền cho các vai trò khác.
+Theo dõi và kiểm soát dữ liệu nhạy cảm.
+Quyền hạn:
+Thêm, sửa, xóa người dùng.
+Xem và chỉnh sửa mọi dữ liệu.
+Truy cập và quản lý các báo cáo phân tích hiệu suất.
+
+2. System Administrator
+Trách nhiệm:
+Duy trì và bảo mật hệ thống.
+Quản lý cơ sở hạ tầng công nghệ thông tin.
+Quyền hạn:
+Quản lý các cấu hình kỹ thuật và tài sản công nghệ.
+Đảm bảo hoạt động ổn định của hệ thống.
+
+3. Medical Director
+Trách nhiệm:
+Lãnh đạo và giám sát toàn bộ hoạt động y tế.
+Phê duyệt các chính sách và quy trình y tế.
+Quyền hạn:
+Truy cập thông tin bệnh nhân từ mọi chuyên khoa.
+Xem và phê duyệt các báo cáo y tế tổng hợp.
+
+4. Doctor
+Trách nhiệm:
+Xem và cập nhật hồ sơ bệnh nhân thuộc phạm vi chuyên môn.
+Ghi chú và đưa ra các chẩn đoán hoặc chỉ định điều trị.
+Quyền hạn:
+Truy cập dữ liệu bệnh nhân trong chuyên khoa.
+Gửi và nhận thông tin từ các phòng ban khác (xét nghiệm, dược).
+
+5. Resident (Bác sĩ nội trú)
+Trách nhiệm:
+Hỗ trợ bác sĩ chính trong điều trị.
+Ghi chú lâm sàng và học hỏi kinh nghiệm.
+Quyền hạn:
+Truy cập hồ sơ bệnh nhân được phân công.
+Không có quyền chỉnh sửa các quyết định điều trị.
+
+6. Nurse (Y tá)
+Trách nhiệm:
+Theo dõi và chăm sóc bệnh nhân.
+Thực hiện các y lệnh từ bác sĩ.
+Quyền hạn:
+Truy cập hồ sơ điều dưỡng.
+Cập nhật trạng thái bệnh nhân (huyết áp, nhịp tim, v.v.).
+
+7. Pharmacist (Dược sĩ)
+Trách nhiệm:
+Quản lý kho thuốc và đơn thuốc.
+Xác nhận và cung cấp thuốc cho bệnh nhân.
+Quyền hạn:
+Truy cập dữ liệu đơn thuốc và kho thuốc.
+Cập nhật tình trạng thuốc trong kho.
+
+8. Lab Technician (Kỹ thuật viên phòng xét nghiệm)
+Trách nhiệm:
+Xử lý và phân tích mẫu xét nghiệm.
+Cung cấp kết quả xét nghiệm cho bác sĩ.
+Quyền hạn:
+Truy cập dữ liệu xét nghiệm.
+Cập nhật trạng thái các yêu cầu xét nghiệm.
+
+9. Health Records Manager
+Trách nhiệm:
+Quản lý hồ sơ bệnh nhân.
+Đảm bảo tuân thủ các quy định pháp luật về bảo mật dữ liệu.
+Quyền hạn:
+Truy cập và tổ chức các hồ sơ y tế.
+Sửa đổi thông tin hành chính của bệnh nhân.
+
+10. Receptionist
+Trách nhiệm:
+Quản lý lịch hẹn và thông tin liên lạc với bệnh nhân.
+Quyền hạn:
+Xem thông tin liên hệ và lịch hẹn của bệnh nhân.
+Không có quyền truy cập vào dữ liệu y tế.
+
+11. Patient (Bệnh nhân)
+Trách nhiệm:
+Xem thông tin cá nhân và lịch sử y tế.
+Liên hệ với bác sĩ qua cổng thông tin.
+Quyền hạn:
+Truy cập lịch sử điều trị cá nhân.
+Đặt lịch hẹn trực tuyến.
+
+12. IT Security Officer
+Trách nhiệm:
+Đảm bảo an toàn dữ liệu và phát hiện các mối đe dọa bảo mật.
+Quyền hạn:
+Xem nhật ký hệ thống và các cảnh báo bảo mật.
+Thực hiện các biện pháp phòng ngừa hoặc khắc phục.
+
+
+Đặc điểm	HIS (Health Information Systems)	EHR (Electronic Health Records)	Hospital Information Systems (HIS)
+Phạm vi	Toàn bộ hệ thống y tế (quốc gia/khu vực).	Hồ sơ sức khỏe cá nhân.	Một bệnh viện cụ thể.
+Tích hợp dữ liệu	Nhiều nguồn (bệnh viện, y tế công cộng).	Dữ liệu y tế của bệnh nhân từ nhiều nguồn.	Tập trung vào hoạt động của bệnh viện.
+Mục tiêu	Hỗ trợ quản lý và hoạch định chính sách y tế.	Hỗ trợ bác sĩ và bệnh nhân trong chăm sóc sức khỏe.	Quản lý toàn bộ hoạt động của bệnh viện.
+Người sử dụng chính	Chính phủ, nhà hoạch định chính sách.	Bác sĩ, bệnh nhân.	Ban lãnh đạo bệnh viện, nhân viên y tế.
+Ứng dụng	Phân tích dữ liệu lớn, báo cáo thống kê.	Theo dõi và điều trị bệnh nhân.	Quản lý bệnh viện và hoạt động y tế.

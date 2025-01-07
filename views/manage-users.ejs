@@ -1,0 +1,33 @@
+<%- include ('layouts/header') %>
+<h1 class="table">Manage Users</h1>
+<h3 style="color: #fff;">(Press ctrl or command on MAC while selecting to select multiple roles, old roles will be replaced)</h3>
+<table class="table">
+  <thead>
+    <th>id</th>
+    <th>email</th>
+    <th>roles</th>
+    
+  </thead>
+  <tbody>
+    <% users.forEach(user => { %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><a href="/admin/user/<%= user.id %>"><%= user.email %></a></td>
+
+      <td>
+        <form action="/admin/update-role" method="post" class="manage-user-form">
+          <input type="hidden" name="id" value="<%= user.id %>" />
+          <select name="roles[]" id="roles" multiple>
+            <option value="ADMIN" <%= user.roles.includes('ADMIN') ? 'selected' : '' %>>Admin</option>
+            <option value="EMPLOYEE" <%= user.roles.includes('EMPLOYEE') ? 'selected' : '' %>>Employee</option>
+          </select>
+          <input type="submit" value="update">
+        </form>
+      </td>
+
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include ('layouts/footer') %>

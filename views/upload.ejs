@@ -1,0 +1,90 @@
+<%- include('layouts/header') %>
+
+  
+  <form action="/upload" method="POST" enctype="multipart/form-data" class="lg-form" 
+  style="width: 90%;">
+    <h1 style="color: #fff;">UPLOAD PLATE IMAGE</h1>
+    <input type="file" name="plateImage" id="plateImage" accept="image/*" required onchange="previewImage(event)">
+    <img id="preview" src="#" alt="Image Preview" style="display: none; margin-top: 20px; max-width: 100%; height: auto;">
+    <div id="loading" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+      
+    <div>
+        <input type="submit" value="Upload" />
+    </div>
+  </form>
+
+<%- include('./layouts/footer') %>
+
+<script>
+    function previewImage(event) {
+        const input = event.target;
+        const reader = new FileReader();
+        reader.onload = function() {
+            const preview = document.getElementById('preview');
+            preview.src = reader.result;
+            preview.style.display = 'block';
+
+            // Hiển thị loading
+            document.getElementById('loading').style.display = 'block';
+
+            // Gọi API nhận diện biển số
+            const formData = new FormData();
+            formData.append('plateImage', input.files[0]);
+
+            fetch('/upload/recognize', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Ẩn loading
+                document.getElementById('loading').style.display = 'none';
+
+                // Xử lý kq nhận diện biển số
+                console.log(data);
+            })
+            .catch(error => {
+                // Ẩn loading
+                document.getElementById('loading').style.display = 'none';
+
+                console.error('Error:', error);
+            });
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+</script>
+
+<style>
+    .spinner {
+        border: 16px solid #f3f3f3;
+        border-top: 16px solid #3498db;
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    #loading {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+</style>

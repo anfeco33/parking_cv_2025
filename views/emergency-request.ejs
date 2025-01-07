@@ -1,0 +1,14 @@
+<%- include('./layouts/header') %>
+
+<h1>Request Emergency Access</h1>
+<form action="/emergency/emergency-access/request" method="post" class="lg-form"> 
+  <label for="targetResource">Target Resource</label>
+  <input type="text" id="targetResource" name="targetResource" placeholder="Email or UserID" required>
+  
+  <label for="reason">Reason</label>
+  <textarea id="reason" name="reason" required></textarea>
+  
+  <input type="submit" value="Request access" />
+</form>
+
+<%- include('./layouts/footer') %>

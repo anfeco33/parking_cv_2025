@@ -1,0 +1,48 @@
+<%- include('layouts/header') %>
+<h1>My Emergency Access Requests</h1>
+
+<% if (messages.success) { %>
+  <div class="alert alert-success"><%= messages.success %></div>
+<% } %>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Requested Resource</th>
+      <th>Reason</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (requests.length === 0) { %>
+      <tr>
+        <td colspan="4">You have not submitted any requests yet.</td>
+      </tr>
+    <% } else { %>
+      <% requests.forEach(req => { %>
+        <tr>
+          <td><%= req.targetResource %></td>
+          <td><%= req.reason %></td>
+          <td><%= req.status %></td>
+          <td>
+            <% if (req.status === 'approved') { %>
+              <% if (req.resolvedResourceLink) { %>
+                <a href="<%= req.resolvedResourceLink %>">Access Resource</a>
+              <% } else { %>
+                <!-- Không tìm thấy link tương ứng (user không tồn tại?) -->
+                No resource found for given email
+              <% } %>
+            <% } else if (req.status === 'pending') { %>
+              Waiting for approval
+            <% } else if (req.status === 'denied') { %>
+              Denied
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    <% } %>
+  </tbody>
+</table>
+
+<%- include('layouts/footer') %>

@@ -1,0 +1,48 @@
+<%- include('layouts/header') %>
+
+<h1 class="table">Emergency Access Requests</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Requester</th>
+      <th>Target Resource</th>
+      <th>Reason</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (requests.length === 0) { %>
+      <tr>
+        <td colspan="6">No pending requests</td>
+      </tr>
+    <% } else { %>
+      <% requests.forEach(req => { %>
+        <tr>
+          <td style="margin-right: 100px;"><%= req.id %></td>
+          <td><%= req.requesterId ? req.requesterId.email : 'Unknown' %></td>
+          <td><%= req.targetResource %></td>
+          <td><%= req.reason %></td>
+          <td><%= req.status %></td>
+          <td>
+            <form action="/emergency/approve/<%= req.id %>" class="manage-user-form" method="post" style="display:inline;">
+                <input type="submit" value="Approve">
+            </form>
+            <form action="/emergency/deny/<%= req.id %>" class="manage-user-form" method="post" style="display:inline;">
+                <input type="submit" value="Deny">
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    <% } %>
+  </tbody>
+</table>
+
+<%- include('layouts/footer') %>
+<style>
+    .table td, .table th {
+      padding: 10px 20px;
+    }
+</style>

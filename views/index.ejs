@@ -1,0 +1,68 @@
+<%- include('./layouts/header') %>
+
+<h1 class="title">License Plate Recognition Parking System</h1>
+
+  <% if (user && (user.roles.includes('ADMIN') || user.roles.includes('EMPLOYEE'))) { %>
+    <div class="feature-card">
+      <h3>Begin capture process</h3>
+      <a href="/upload" class="btn">Start</a>
+    </div>
+  <% } else { %>
+    <div class="features-container">
+      <div class="feature-card-large">
+        <img src="/images/cam.jpg" alt="Description of the image" class="feature-image">
+    </div>
+  <% } %>
+
+<%- include('./layouts/footer') %>
+
+<style>
+  .features-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .feature-card-large {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+  }
+
+  .feature-image {
+    width: 500px;
+    height: auto;
+    border-radius: 8px;
+  }
+  .feature-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+  }
+  .feature-card h3 {
+    margin-top: 0;
+  }
+  .btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  .btn:hover {
+    background-color: #0056b3;
+  }
+</style>

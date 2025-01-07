@@ -1,0 +1,73 @@
+<%- include('./layouts/header') %>
+
+<h1>Register</h1>
+<form action="/auth/register" method="post" class="lg-form">
+  <div>
+    <label for="firstName">First Name</label>
+    <input
+      type="text"
+      name="firstName"
+      id="firstName"
+      value="<%= locals.firstName ? firstName : '' %>"
+      required
+    />
+  </div>
+  <div>
+    <label for="lastName">Last Name</label>
+    <input
+      type="text"
+      name="lastName"
+      id="lastName"
+      value="<%= locals.lastName ? lastName : '' %>"
+      required
+    />
+  </div>
+  <div>
+    <label for="dateOfBirth">Date of Birth</label>
+    <input
+      type="date"
+      name="dateOfBirth"
+      id="dateOfBirth"
+      value="<%= locals.dateOfBirth ? dateOfBirth : '' %>"
+      required
+    />
+  </div>
+  <div>
+    <label for="phone">Phone</label>
+    <input
+      type="text"
+      name="phone"
+      id="phone"
+      value="<%= locals.phone ? phone : '' %>"
+      required
+    />
+  </div>
+  <div>
+    <label for="email">Email</label>
+    <input
+      type="text"
+      name="email"
+      id="email"
+      value="<%= locals.email ? email : '' %>"
+      required
+    />
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required />
+  </div>
+  <div>
+    <label for="password2">Confirm Password</label>
+    <input type="password" name="password2" id="password2" required />
+  </div>
+  <div>
+    <input type="submit" value="Register" />
+  </div>
+</form>
+<div>
+  <p style="color: #fff;">
+    Already have an account? <span><a href="/auth/login">Login</a></span>
+  </p>
+</div>
+<br/>
+<%- include('./layouts/footer') %>

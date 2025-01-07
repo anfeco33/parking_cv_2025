@@ -1,0 +1,26 @@
+<nav style="background-color: #fff;">
+  <h2 style="margin-left: 20px; margin-right: 100px;">PARKING</h2>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <% if (user) { %>
+    <li><a href="/user/profile">Profile</a></li>
+    <% if (user.roles.includes('ADMIN')) { %>
+    <li><a href="/admin/users">Manage Users</a></li>
+    <% } %>
+    <li><a href="/auth/logout">Logout</a></li>
+    <% } else { %>
+    <!-- <li><a href="/auth/register">Register</a></li> -->
+    <li><a href="/auth/login">Login</a></li>
+    <% } %>
+  </ul>
+  <% if (user) { %>
+    <% const firstName = user.firstName; %>
+    <strong style="margin-left: auto; margin-right: 20px;">Welcome, <%= firstName %>!</strong>
+  <% } %>
+</nav>
+
+<style>
+    ul li {
+    margin-top: 10px;
+  }
+</style>
