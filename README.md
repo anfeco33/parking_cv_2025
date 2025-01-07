@@ -7,10 +7,19 @@ Chức năng:
 Công cụ bổ sung:
 Tích hợp với camera an ninh.
 
+## Must Run
+
+```bash
+git clone https://github.com/ultralytics/yolov5.git
+cd yolov5
+pip install -r requirements.txt
+
 ## To run python file independently
+
+```bash
 - cd to [your path]/role-based-access-control-master/yolov5
 
-    bash 
+```bash
 python [your path]/role-based-access-control-master/python_scripts/recognize_plate.py [image_file]
 
 ## To start setting up the project
