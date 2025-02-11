@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 const { PythonShell } = require('python-shell');
+const { spawn } = require('child_process');
 const Vehicle = require('../models/vehicle.model');
 
 // Cấu hình multer để lưu trữ file upload
@@ -22,49 +23,63 @@ router.get('/', (req, res) => {
 });
 
 router.post('/recognize', upload.single('plateImage'), (req, res) => {
-    const filePath = req.file.path;
-    const scriptPath = path.join(__dirname, '../python_scripts/recognize_plate.py');
+  const filePath = req.file.path;
+  const scriptPath = path.join(__dirname, '../python_scripts/recognize_plate.py');
 
-    const options = {
-      args: [filePath]
-    };
+  console.log('Running Python script:', scriptPath);
+  console.log('File path:', filePath);
 
-    PythonShell.run(scriptPath, options, function (err, results) {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: 'An error occurred while recognizing the license plate' });
+  const pyProg = spawn('python', [scriptPath, filePath]);
+
+  let recognizedText = '';
+
+  pyProg.stdout.on('data', function(data) {
+      const output = data.toString();
+      console.log('Python script output:', output);
+
+      // Lọc ra chỉ phần kết quả nhận diện biển số
+      const match = output.match(/[A-Z0-9]+/);
+      if (match) {
+          recognizedText = match[0];
       }
-  
-      // Kết quả nhận diện từ script Python
-      const recognizedText = results[0];
-      res.json({ recognizedText });
-    });
   });
+
+  pyProg.stderr.on('data', (data) => {
+      console.error('Python script error:', data.toString());
+      // if (!res.headersSent) {
+      //     res.status(500).json({ error: 'An error occurred while recognizing the license plate' });
+      // }
+  });
+
+  pyProg.on('close', (code) => {
+      console.log(`Python script exited with code ${code}`);
+      if (!res.headersSent) {
+          res.json({ recognizedText });
+      }
+  });
+});
   
-  // upload ảnh
-  router.post('/', upload.single('plateImage'), (req, res) => {
-    try {
-      // File đã được lưu trữ trong thư mục 'uploads/'
-      console.log(req.file); // Thông tin file upload
-  
-      // Lưu thông tin vào cơ sở dữ liệu
+router.post('/save', upload.single('plateImage'), (req, res) => {
+  try {
+      console.log('alo:');
       const vehicle = new Vehicle({
-        imagePath: req.file.path,
-        recognizedText: req.body.recognizedText
+          image: req.file.path,
+          plate: req.body.recognizedText,
+          timestamp: req.body.timestamp
       });
-  
+
       vehicle.save()
-        .then(() => {
-          res.send('File uploaded and data saved successfully');
-        })
-        .catch(error => {
-          console.error(error);
-          res.status(500).send('An error occurred while saving the data');
-        });
-    } catch (error) {
+          .then(() => {
+              res.json({ message: 'Data saved successfully' });
+          })
+          .catch(error => {
+              console.error(error);
+              res.status(500).json({ error: 'An error occurred while saving the data' });
+          });
+  } catch (error) {
       console.error(error);
-      res.status(500).send('An error occurred while uploading the file');
-    }
+      res.status(500).json({ error: 'An error occurred while uploading the file' });
+  }
 });
   
 module.exports = router;

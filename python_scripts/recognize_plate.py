@@ -158,12 +158,13 @@ def recognize_plate(plate_img, single_line=True):
             ocr_results = reader.readtext(char_img_resized, detail=1, allowlist="0123456789ABCDEFGHKLMNPRSTUVXYZ")
             if ocr_results and ocr_results[0][2]: 
                 recognized_text.append(ocr_results[0][1])
-                print(f"Ký tự {i}: {ocr_results[0][1]}")
+                # print(f"Ký tự {i}: {ocr_results[0][1]}")
             else:
-                print(f"Ký tự {i}: Không nhận diện được")
+                # print(f"Ký tự {i}: Không nhận diện được")
+                recognized_text.append("")
     
         final_text = "".join(recognized_text)
-        print(f"Biển số: '{final_text}'")
+        # print(f"Biển số: '{final_text}'")
         return final_text
 
 # 2-line LP
@@ -339,16 +340,18 @@ if __name__ == "__main__":
             class_label = "BS1" if cls == 0 else "BS2"
             output_path = f'plate_{class_label}_{i}.jpg'
             cv2.imwrite(output_path, transformed_plate)
-            print(f"Saved transformed plate to {output_path}")
+            # print(f"Saved transformed plate to {output_path}")
 
             # class_label = "BS1" if int(cls) == 0 else "BS2"
             if class_label == "BS1":
                 recognized_text = recognize_plate(transformed_plate, single_line=True)
-                print(f"Recognized Text (BS1): {recognized_text}")
+                # print(f"Recognized Text (BS1): {recognized_text}")
+                print(recognized_text)
 
             elif class_label == "BS2":
                 recognized_text = recognize_LP_with_cnn(image_path, yolo_model_path, cnn_model_path)
-                print(f"Recognized Text (BS2): {recognized_text}")
+                # print(f"Recognized Text (BS2): {recognized_text}")
+                print(recognized_text)
 
     else:
         print("NO DETECTIONS!")

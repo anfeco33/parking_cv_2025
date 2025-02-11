@@ -7,6 +7,25 @@
       <h3>Begin capture process</h3>
       <a href="/upload" class="btn">Start</a>
     </div>
+    <!-- history table -->
+    <h1 class="table">History</h1>
+      <table class="table">
+        <thead>
+          <th>Image</th>
+          <th>Plate Recognized</th>
+          <th>At Time</th>
+          
+        </thead>
+        <tbody>
+          <% vehicles.forEach(vehicle => { %>
+            <tr>
+                <td><img src="<%= vehicle.image.replace('public', '') %>" alt="Vehicle Image" width="100"></td>
+                <td><%= vehicle.plate %></td>
+                <td><%= new Date(vehicle.time).toLocaleString('vi-VN') %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
   <% } else { %>
     <div class="features-container">
       <div class="feature-card-large">

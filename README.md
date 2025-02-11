@@ -1,13 +1,12 @@
 Hệ thống nhận diện và lưu trữ biển số xe ra/vào bãi đỗ xe.
 Chức năng:
-- Chụp/ tải ảnh/video biển số xe.
+- Tải ảnh
 - Phát hiện và nhận diện biển số xe.
-- Lưu trữ thông tin như biển số, thời gian ra/vào, và ảnh xe.
-- Tìm kiếm thông tin xe dựa trên biển số.
+- Lưu trữ thông tin như biển số, thời gian ra/vào và ảnh xe.
 Công cụ bổ sung:
 Tích hợp với camera an ninh.
 
-## Must Run
+## Must Run (While using Colab/kaggle env, if not -> skip)
 
 ```bash
 git clone https://github.com/ultralytics/yolov5.git
@@ -17,10 +16,12 @@ pip install -r requirements.txt
 ## To run python file independently
 
 ```bash
-- cd to [your path]/role-based-access-control-master/yolov5
+- cd to [your path]/yolov5
 
 ```bash
-python [your path]/role-based-access-control-master/python_scripts/recognize_plate.py [image_file]
+python ../python_scripts/recognize_plate.py [image_file path]
+
+(You can test by using images in the folder /dataset/kaggledata/testimages)
 
 ## To start setting up the project
 

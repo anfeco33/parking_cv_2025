@@ -6,6 +6,10 @@
     <h1 style="color: #fff;">UPLOAD PLATE IMAGE</h1>
     <input type="file" name="plateImage" id="plateImage" accept="image/*" required onchange="previewImage(event)">
     <img id="preview" src="#" alt="Image Preview" style="display: none; margin-top: 20px; max-width: 100%; height: auto;">
+    <div id="recognizedTextContainer" style="display:none;">
+        <h2 id="recognizedText"></h2>
+    </div>
+    
     <div id="loading" style="display: none;">
         <div class="spinner"></div>
     </div>
@@ -33,6 +37,7 @@
             const formData = new FormData();
             formData.append('plateImage', input.files[0]);
 
+            console.log('Calling /recognize API');
             fetch('/upload/recognize', {
                 method: 'POST',
                 body: formData
@@ -44,6 +49,36 @@
 
                 // Xử lý kq nhận diện biển số
                 console.log(data);
+                // alert('Kết quả nhận diện: ' + data.recognizedText);
+                const recognizedTextInput = document.createElement('input');
+                recognizedTextInput.type = 'hidden';
+                recognizedTextInput.name = 'recognizedText';
+                recognizedTextInput.value = data.recognizedText;
+                document.querySelector('form').appendChild(recognizedTextInput);
+
+                // show kq
+                const recognizedTextContainer = document.getElementById('recognizedTextContainer');
+                const recognizedTextElement = document.getElementById('recognizedText');
+                recognizedTextElement.textContent = data.recognizedText;
+                recognizedTextContainer.style.display = 'block';
+
+                // lưu data
+                const saveFormData = new FormData();
+                saveFormData.append('plateImage', input.files[0]);
+                saveFormData.append('recognizedText', data.recognizedText);
+                saveFormData.append('timestamp', new Date().toISOString());
+
+                fetch('/upload/save', {
+                    method: 'POST',
+                    body: saveFormData
+                })
+                .then(response => response.json())
+                .then(saveData => {
+                    console.log('Data saved successfully:', saveData);
+                })
+                .catch(error => {
+                    console.error('Error saving data:', error);
+                });
             })
             .catch(error => {
                 // Ẩn loading
@@ -86,5 +121,11 @@
         justify-content: center;
         align-items: center;
         z-index: 1000;
+    }
+
+    #recognizedTextContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 </style>
