@@ -200,7 +200,8 @@ def recognize_two_line_plate_with_cnn(plate_img, cnn_model):
     lower_regions = find_characters_with_bounding_boxes(lower_binary, line="lower")
     upper_text = recognize_characters_with_cnn(upper_binary, upper_regions, cnn_model)
     lower_text = recognize_characters_with_cnn(lower_binary, lower_regions, cnn_model)
-    return f"{upper_text} - {lower_text}".strip()
+    # print("python res 2-line: ", f"{upper_text} - {lower_text}".strip())
+    return f"{upper_text}{lower_text}".strip()
 
 def recognize_LP_with_cnn(image_path, yolo_model_path, cnn_model_path):
     yolo_model = torch.hub.load('ultralytics/yolov5', 'custom', path=yolo_model_path, force_reload=True)
